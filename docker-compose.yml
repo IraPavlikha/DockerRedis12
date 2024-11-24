@@ -4,22 +4,24 @@ services:
   jwt-create:
     build:
       context: ./jwt-create
-    ports:
-      - "3000:3000"
     networks:
       - app-network
 
   jwt-verify:
     build:
       context: ./jwt-verify
-    ports:
-      - "4000:4000"
     networks:
       - app-network
 
   front-public:
     build:
       context: ./front-public
+    networks:
+      - app-network
+
+  nginx:
+    build:
+      context: ./nginx
     ports:
       - "80:80"
     networks:
