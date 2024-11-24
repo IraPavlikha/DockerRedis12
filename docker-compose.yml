@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  jwt-create:
+    build:
+      context: ./jwt-create
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  jwt-verify:
+    build:
+      context: ./jwt-verify
+    ports:
+      - "4000:4000"
+    networks:
+      - app-network
+
+  front-public:
+    build:
+      context: ./front-public
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

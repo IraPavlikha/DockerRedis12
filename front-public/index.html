@@ -1,0 +1,32 @@
+<!-- front-public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Frontend</title>
+    <script>
+        async function createToken() {
+            const response = await fetch('http://jwt-create:3000/create');
+            const data = await response.json();
+            document.getElementById('token').innerText = `Generated Token: ${data.token}`;
+        }
+
+        async function verifyToken() {
+            const token = document.getElementById('inputToken').value;
+            const response = await fetch(`http://jwt-verify:4000/verify?token=${token}`);
+            const data = await response.json();
+            document.getElementById('verificationResult').innerText = JSON.stringify(data, null, 2);
+        }
+    </script>
+</head>
+<body>
+<h1>JWT Frontend</h1>
+<button onclick="createToken()">Create JWT Token</button>
+<p id="token"></p>
+<h2>Verify JWT Token</h2>
+<input type="text" id="inputToken" placeholder="Enter token">
+<button onclick="verifyToken()">Verify</button>
+<pre id="verificationResult"></pre>
+</body>
+</html>
